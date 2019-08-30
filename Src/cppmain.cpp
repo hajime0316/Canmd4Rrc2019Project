@@ -78,14 +78,13 @@ void loop(void) {
                 break;
             
             case PID_MODE:
-                stm32_printf("PID        ");
+                stm32_printf("PID  ");
                 break;
 
             default:
-                stm32_printf("XXXX       ");
+                stm32_printf("XXXX  ");
                 break;
         }
-        stm32_printf("%2d  ", motor_setup_data[i].control_mode);
         stm32_printf("%4d  ", motor_setup_data[i].kp);
         stm32_printf("%4d  ", motor_setup_data[i].ki);
         stm32_printf("%4d  ", motor_setup_data[i].kd);
@@ -128,7 +127,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
         };
 
         // velocityモジュールの作成
-        static Stm32Velocity velocity_module[2] = {{&htim2, 0}, {&htim3, 0}};
+        static Stm32Velocity velocity_module[2] = {{&htim2, 1}, {&htim3, 1}};
         // 速度計算
         for (int i = 0; i < 2; i++){
             g_velocity[i] = velocity_module[i].periodic_calculate_velocity();
