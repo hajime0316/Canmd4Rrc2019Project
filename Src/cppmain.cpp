@@ -6,6 +6,7 @@
 #include "usart.h"
 #include "gpio.h"
 
+// モジュールのインクルード
 #include "stm32_easy_can/stm32_easy_can.h"
 #include "stm32_velocity/stm32_velocity.hpp"
 #include "canmd_manager/canmd_manager.h"
