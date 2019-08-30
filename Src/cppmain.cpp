@@ -81,7 +81,7 @@ void loop(void) {
 //**************************
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-	// 5msecタイマ
+	// 10msecタイマ
 	if(htim->Instance == TIM6) {
 		int motor_control_data[2] = {};
 
@@ -141,7 +141,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
         pwm1.update_duty(duty_rate[1]);
 	}
 
-	// 約180msecタイマ
+	// 100msecタイマ
 	if(htim->Instance == TIM7) {
 		if(canmd_manager_time_out_check()) {
 			HAL_GPIO_WritePin(LED_B_GPIO_Port, LED_B_Pin, GPIO_PIN_SET);
