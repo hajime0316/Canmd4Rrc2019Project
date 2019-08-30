@@ -14,6 +14,8 @@
 #include "stm32_antiphase_pwm/stm32_antiphase_pwm.hpp"
 #include "pid/pid.hpp"
 
+#define CONTROL_LOOP_TIME 0.01 // sec
+
 static int md_id = 0;
 static int g_velocity[2] = {};
 
@@ -96,8 +98,18 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
         // PIDモジュールを作成
         static Pid pid_module[2] = {
-            {(double)motor_setup_data[0].kp, (double)motor_setup_data[0].ki, (double)motor_setup_data[0].kd},
-            {(double)motor_setup_data[1].kp, (double)motor_setup_data[1].ki, (double)motor_setup_data[1].kd}
+            {
+                (double)motor_setup_data[0].kp,
+                (double)motor_setup_data[0].ki,
+                (double)motor_setup_data[0].kd,
+                CONTROL_LOOP_TIME
+            },
+            {
+                (double)motor_setup_data[1].kp,
+                (double)motor_setup_data[1].ki,
+                (double)motor_setup_data[1].kd,
+                CONTROL_LOOP_TIME
+            }
         };
 
         // velocityモジュールの作成
