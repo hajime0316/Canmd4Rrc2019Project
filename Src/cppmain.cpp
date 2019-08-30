@@ -98,8 +98,18 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
         // PIDモジュールを作成
         static Pid pid_module[2] = {
-            {(double)motor_setup_data[0].kp, (double)motor_setup_data[0].ki, (double)motor_setup_data[0].kd},
-            {(double)motor_setup_data[1].kp, (double)motor_setup_data[1].ki, (double)motor_setup_data[1].kd}
+            {
+                (double)motor_setup_data[0].kp,
+                (double)motor_setup_data[0].ki,
+                (double)motor_setup_data[0].kd,
+                CONTROL_LOOP_TIME
+            },
+            {
+                (double)motor_setup_data[1].kp,
+                (double)motor_setup_data[1].ki,
+                (double)motor_setup_data[1].kd,
+                CONTROL_LOOP_TIME
+            }
         };
 
         // velocityモジュールの作成
