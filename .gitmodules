@@ -7,3 +7,6 @@
 [submodule "Src/stm32_easy_can"]
 	path = Src/stm32_easy_can
 	url = https://github.com/hajime0316/stm32_easy_can.git
+[submodule "Src/stm32_velocity"]
+	path = Src/stm32_velocity
+	url = https://github.com/hajime0316/stm32_velocity.git
