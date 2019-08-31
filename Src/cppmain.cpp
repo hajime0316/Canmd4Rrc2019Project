@@ -36,15 +36,7 @@ void setup(void) {
     //// 通信関係
     stm32_printf_init(&huart3);
     stm32_easy_can_init(&hcan, md_id, 0X7FF);
-    //// PWM
-    HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_1);
-    HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_1);
-    HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_2);
-    HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_2);
-    HAL_TIM_PWM_Start(&htim8,TIM_CHANNEL_1);
-    HAL_TIMEx_PWMN_Start(&htim8, TIM_CHANNEL_1);
-    HAL_TIM_PWM_Start(&htim8,TIM_CHANNEL_2);
-    HAL_TIMEx_PWMN_Start(&htim8, TIM_CHANNEL_2);
+
     //// タイミングリソース
     HAL_TIM_Base_Start_IT(&htim7);
 
