@@ -157,8 +157,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
         }
 
 		// PWMのデューティー比更新
-        static Stm32AntiphasePwm pwm0(&htim8);
-        static Stm32AntiphasePwm pwm1(&htim1);
+        static Stm32AntiphasePwmN pwm0(&htim8, TIM_CHANNEL_1, TIM_CHANNEL_2);
+        static Stm32AntiphasePwmN pwm1(&htim1, TIM_CHANNEL_1, TIM_CHANNEL_2);
 
         pwm0.update_duty(duty_rate[0]);
         pwm1.update_duty(duty_rate[1]);
