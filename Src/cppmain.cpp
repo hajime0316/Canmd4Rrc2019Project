@@ -26,25 +26,31 @@ void setup(void) {
           | HAL_GPIO_ReadPin(DIP_SW_2_GPIO_Port, DIP_SW_2_Pin) << 1
           | HAL_GPIO_ReadPin(DIP_SW_1_GPIO_Port, DIP_SW_1_Pin) << 0;
 
-    if(md_id == 0) {
-        md_id = 0X7FF;
-        HAL_GPIO_WritePin(LED_R_GPIO_Port, LED_R_Pin, GPIO_PIN_RESET);
-    }
     // ソフトウェアモジュール初期化
     canmd_manager_init();
-    // ハードウェアモジュールスタート
-    //// 通信関係
+
+    // printfモジュールスタート
     stm32_printf_init(&huart3);
+
+    // Debug Output
+    stm32_printf("\r\n...\r\n");
+    stm32_printf("md id = %d\r\n", md_id);
+
+    // md_idのチェック
+    // md_id = 0なら，プログラムを止める
+    if(md_id == 0) {
+        stm32_printf("Invalid md_id. Process is stoped.\r\n");
+        HAL_GPIO_WritePin(LED_R_GPIO_Port, LED_R_Pin, GPIO_PIN_RESET);
+        while (1);
+    }
+
+    //// 通信関係
     stm32_easy_can_init(&hcan, md_id, 0X7FF);
 
     //// タイミングリソース
     HAL_TIM_Base_Start_IT(&htim7);
 
-    // Debug Output
-    stm32_printf("\r\n...\r\n");
-    stm32_printf("md id = %d\r\n", md_id);
     stm32_printf("Setup routine start.\r\n");
-
     // セットアップルーチン
     while(!canmd_manager_is_motor_setup_data_received());
     stm32_printf("Setup routine was finished!\r\n");
