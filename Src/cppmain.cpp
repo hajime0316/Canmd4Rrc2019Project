@@ -37,8 +37,9 @@ void setup(void) {
     stm32_printf("md id = %d\r\n", md_id);
 
     if(md_id == 0) {
-        md_id = 0X7FF;
+        stm32_printf("Invalid md_id. Process is stoped.\r\n");
         HAL_GPIO_WritePin(LED_R_GPIO_Port, LED_R_Pin, GPIO_PIN_RESET);
+        while (1);
     }
 
     //// 通信関係
