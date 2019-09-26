@@ -26,10 +26,6 @@ void setup(void) {
           | HAL_GPIO_ReadPin(DIP_SW_2_GPIO_Port, DIP_SW_2_Pin) << 1
           | HAL_GPIO_ReadPin(DIP_SW_1_GPIO_Port, DIP_SW_1_Pin) << 0;
 
-    if(md_id == 0) {
-        md_id = 0X7FF;
-        HAL_GPIO_WritePin(LED_R_GPIO_Port, LED_R_Pin, GPIO_PIN_RESET);
-    }
     // ソフトウェアモジュール初期化
     canmd_manager_init();
 
@@ -39,6 +35,11 @@ void setup(void) {
     // Debug Output
     stm32_printf("\r\n...\r\n");
     stm32_printf("md id = %d\r\n", md_id);
+
+    if(md_id == 0) {
+        md_id = 0X7FF;
+        HAL_GPIO_WritePin(LED_R_GPIO_Port, LED_R_Pin, GPIO_PIN_RESET);
+    }
 
     //// 通信関係
     stm32_easy_can_init(&hcan, md_id, 0X7FF);
