@@ -36,15 +36,7 @@ void setup(void) {
     //// 通信関係
     stm32_printf_init(&huart3);
     stm32_easy_can_init(&hcan, md_id, 0X7FF);
-    //// PWM
-    HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_1);
-    HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_1);
-    HAL_TIM_PWM_Start(&htim1,TIM_CHANNEL_2);
-    HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_2);
-    HAL_TIM_PWM_Start(&htim8,TIM_CHANNEL_1);
-    HAL_TIMEx_PWMN_Start(&htim8, TIM_CHANNEL_1);
-    HAL_TIM_PWM_Start(&htim8,TIM_CHANNEL_2);
-    HAL_TIMEx_PWMN_Start(&htim8, TIM_CHANNEL_2);
+
     //// タイミングリソース
     HAL_TIM_Base_Start_IT(&htim7);
 
@@ -165,8 +157,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
         }
 
 		// PWMのデューティー比更新
-        static Stm32AntiphasePwm pwm0(&htim8);
-        static Stm32AntiphasePwm pwm1(&htim1);
+        static Stm32AntiphasePwmN pwm0(&htim8, TIM_CHANNEL_1, TIM_CHANNEL_2);
+        static Stm32AntiphasePwmN pwm1(&htim1, TIM_CHANNEL_1, TIM_CHANNEL_2);
 
         pwm0.update_duty(duty_rate[0]);
         pwm1.update_duty(duty_rate[1]);
