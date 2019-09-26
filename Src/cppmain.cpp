@@ -36,6 +36,8 @@ void setup(void) {
     stm32_printf("\r\n...\r\n");
     stm32_printf("md id = %d\r\n", md_id);
 
+    // md_idのチェック
+    // md_id = 0なら，プログラムを止める
     if(md_id == 0) {
         stm32_printf("Invalid md_id. Process is stoped.\r\n");
         HAL_GPIO_WritePin(LED_R_GPIO_Port, LED_R_Pin, GPIO_PIN_RESET);
