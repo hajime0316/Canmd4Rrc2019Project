@@ -32,19 +32,21 @@ void setup(void) {
     }
     // ソフトウェアモジュール初期化
     canmd_manager_init();
-    // ハードウェアモジュールスタート
-    //// 通信関係
+
+    // printfモジュールスタート
     stm32_printf_init(&huart3);
+
+    // Debug Output
+    stm32_printf("\r\n...\r\n");
+    stm32_printf("md id = %d\r\n", md_id);
+
+    //// 通信関係
     stm32_easy_can_init(&hcan, md_id, 0X7FF);
 
     //// タイミングリソース
     HAL_TIM_Base_Start_IT(&htim7);
 
-    // Debug Output
-    stm32_printf("\r\n...\r\n");
-    stm32_printf("md id = %d\r\n", md_id);
     stm32_printf("Setup routine start.\r\n");
-
     // セットアップルーチン
     while(!canmd_manager_is_motor_setup_data_received());
     stm32_printf("Setup routine was finished!\r\n");
